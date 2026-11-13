@@ -1,7 +1,7 @@
 # TO DO APP
 from datetime import datetime
-import pandas as pd
 from rich import print
+import pandas as pd
 
 class TaskManager:
     
@@ -89,9 +89,14 @@ while True:
             2. Update Task
             3. Delete Task
             4. View Task
+            5. Exit
         """
     )
-    user = int(input("Enter your choice (1/2/3/4) : "))
+    try:
+        user = int(input("Enter your choice (1/2/3/4) : "))
+    except ValueError as v:
+        print("Invalid number !")
+        continue
 
     if user == 1:
         task = input("Enter Task : ")
@@ -111,7 +116,10 @@ while True:
         t.delete_task(tasks=task)
         
     elif user == 4:
-        if t.memory is not None:
+        if t.memory:
             t.view_tasks()
         else:
-            print("Enter task first")
+            print(f"Enter task first. Choose option {1}")
+
+    elif user == 5:
+        break
